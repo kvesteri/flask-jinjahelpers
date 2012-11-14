@@ -21,6 +21,7 @@ def init_jinja_env(env):
         visible_page_numbers=visible_page_numbers,
         qp_url_for=qp_url_for
     )
+    return env
 
 
 def qp_url_for(endpoint, **kwargs):
