@@ -1,0 +1,22 @@
+{% macro delete_confirm_modal(title, question, item) %}
+  <div id="{{ item.delete_modal_name }}" class="modal hide fade">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">×</a>
+      <h3>{{ title }}</h3>
+    </div>
+    <div class="modal-body">
+      <p>{{ question }}</p>
+    </div>
+    <div class="modal-footer">
+        {% if item.delete_url %}
+          <a href="{{ item.delete_url }}" class="btn btn-danger" data-method="delete">
+        {% else %}
+          <a href="{{ url_for(item.__class__.__name__|lower + '.delete', id=item.id) }}" class="btn btn-danger" data-method="delete">
+        {% endif %}
+        <i class="icon-remove icon-white"></i>
+        Delete
+      </a>
+      <a href="#" class="btn" data-dismiss="modal">Cancel</a>
+    </div>
+  </div>
+{% endmacro %}

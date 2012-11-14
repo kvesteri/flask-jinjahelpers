@@ -1,0 +1,119 @@
+{% macro render_field(field) %}
+    <div class="control-group {% if field.errors %}error{% endif %}">
+        {{ field.label(class_="control-label") }}
+        <div class="controls">
+            {{ field(**kwargs)|safe }}
+            {% if field.errors %}
+                <p class="help-block">{{ field.errors|join(' ') }}</p>
+            {% endif %}
+            {% if field.description %}
+                <p class="help-block">{{ field.description }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro render_limited_textarea(field) %}
+    <div class="control-group textarea-limited {% if field.errors %} error{% endif %}">
+        {{ field.label(class_="control-label") }}
+        <div class="controls">
+            {{ field(**kwargs)|safe }}
+            {% if field.errors %}
+                <span class="help-inline">{{ field.errors|join(' ') }}</span>
+            {% endif %}
+            <div class="character-count">
+                Characters left <span class="charCount">255</span>
+            </div>
+            {% if field.description %}
+                <p class="help-block">{{ field.description }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro render_image_field(field, image) %}
+  <div class="control-group {% if field.errors %}error{% endif %}">
+    {{ field.label(class="control-label") }}
+    <div class="controls">
+      <div class="fileupload {% if image %}fileupload-exists{% else %}fileupload-new{% endif %}" data-provides="fileupload">
+        <div class="fileupload-new thumbnail">
+          <div class="no-image">no image</div>
+        </div>
+        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;">
+          {% if image %}
+            <img src="{{ image.url }}" style="max-width: 200px; max-height: 150px;">
+          {% endif %}
+        </div>
+        <div>
+          <span class="btn btn-file">
+            <span class="fileupload-new">Choose Image…</span>
+            <span class="fileupload-exists">Change</span>
+            {{ field }}
+          </span>
+        </div>
+      </div>
+      {% if field.errors %}
+        <p class="help-block">{{ field.errors|join(' ') }}</p>
+      {% endif %}
+      {% if field.description %}
+        <p class="help-block">{{ field.description }}</p>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}
+
+
+{% macro render_date_picker(field) %}
+  <div class="control-group{% if field.errors %} error{% endif %}">
+    {{ field.label(class_="control-label") }}
+    <div class="controls controls-row">
+      <div class="input-prepend">
+        <span class="add-on"><i class="icon-calendar"></i></span>
+        {{- field(class="input-small date") }}
+      </div>
+    </div>
+    <div class="controls">
+      {% if field.description %}
+        <p class="help-block">{{ field.description }}</p>
+      {% endif %}
+      {% if field.errors %}
+        <p class="help-block">
+          {% for errors in field.errors %}
+            {{ errors }}
+          {% endfor %}
+        </p>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}
+
+
+{% macro render_datetime_picker(field) %}
+  <div class="control-group{% if field.errors %} error{% endif %}">
+    {{ field.label(class_="control-label") }}
+    <div class="controls controls-row">
+      <div class="input-prepend span">
+        <span class="add-on"><i class="icon-calendar"></i></span>
+        {{- field.date(class="input-small date") }}
+      </div>
+      <div class="input-prepend span">
+        <span class="add-on"><i class="icon-time"></i></span>
+        {{- field.time(class="input-mini time") }}
+      </div>
+    </div>
+    <div class="controls">
+      {% if field.description %}
+        <p class="help-block">{{ field.description }}</p>
+      {% endif %}
+      {% if field.errors %}
+        <p class="help-block">
+          {% for errors in field.errors.values() %}
+            {{ errors|join(' ') }}
+          {% endfor %}
+        </p>
+      {% endif %}
+    </div>
+  </div>
+{% endmacro %}
