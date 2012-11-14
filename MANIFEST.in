@@ -1,4 +1,7 @@
 include CHANGES.rst LICENSE README.rst
+include flask_jinjahelpers/templates/_formhelpers.html
+include flask_jinjahelpers/templates/_genericmodals.html
+include flask_jinjahelpers/templates/_tablehelpers.html
 recursive-include flask_jinjahelpers/templates
 recursive-include tests *
 recursive-exclude tests *.pyc
