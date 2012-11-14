@@ -1,0 +1,8 @@
+{% with messages = get_flashed_messages(with_categories=True) %}
+  {% for category, message in messages %}
+    <div class="alert fade in alert-{{ category }}">
+      <a class="close" href="#" data-dismiss="alert">&times;</a>
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endwith %}

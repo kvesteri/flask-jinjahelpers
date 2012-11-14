@@ -11,7 +11,7 @@
         {% if item.delete_url %}
           <a href="{{ item.delete_url }}" class="btn btn-danger" data-method="delete">
         {% else %}
-          <a href="{{ url_for(item.__class__.__name__|lower + '.delete', id=item.id) }}" class="btn btn-danger" data-method="delete">
+          <a href="{{ url_for(item.__table__.__name__ + '.delete', id=item.id) }}" class="btn btn-danger" data-method="delete">
         {% endif %}
         <i class="icon-remove icon-white"></i>
         Delete
