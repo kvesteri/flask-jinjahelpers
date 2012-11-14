@@ -1,5 +1,26 @@
 from flask import request, url_for
+from jinja2 import ChoiceLoader, PackageLoader
 from werkzeug.datastructures import MultiDict
+
+
+def init_jinja_env(env):
+    """
+    Adds flask_jinjahelpers templates and some utility function to given jinja
+    enviroment
+
+    :param env: jinja environment
+    """
+    env.loader = ChoiceLoader([
+        env.loader,
+        PackageLoader(
+            'flask_jinjahelpers',
+            'templates'
+        )
+    ])
+    env.globals.update(
+        visible_page_numbers=visible_page_numbers,
+        qp_url_for=qp_url_for
+    )
 
 
 def qp_url_for(endpoint, **kwargs):
