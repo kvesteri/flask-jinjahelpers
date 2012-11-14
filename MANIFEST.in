@@ -1,0 +1,4 @@
+include CHANGES.rst LICENSE README.rst
+recursive-include flask_jinjahelpers/templates
+recursive-include tests *
+recursive-exclude tests *.pyc
