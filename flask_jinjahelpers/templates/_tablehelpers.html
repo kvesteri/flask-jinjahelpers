@@ -1,16 +1,16 @@
 {% macro render_header_link(view, field, name, sort) %}
   {% if sort|first == '-' and field == sort[1:] %}
     <th class="table-sort-up">
-      <a href="{{ qp_url_for(view, sort=field) }}">{{ name }}</a>
+      <a href="{{ qp_url_for(view, sort=field, **kwargs) }}">{{ name }}</a>
     </th>
   {% else %}
     {% if field == sort %}
       <th class="table-sort-down">
-        <a href="{{ qp_url_for(view, sort='-' + field) }}">{{ name }}</a>
+        <a href="{{ qp_url_for(view, sort='-' + field, **kwargs) }}">{{ name }}</a>
       </th>
     {% else %}
       <th>
-        <a href="{{ qp_url_for(view, sort=field) }}">{{ name }}</a>
+        <a href="{{ qp_url_for(view, sort=field, **kwargs) }}">{{ name }}</a>
       </th>
     {% endif %}
   {% endif %}
@@ -23,7 +23,7 @@
   <div class="pagination pagination-centered">
     <ul>
       {% if current_page > 1 %}
-        <li><a href="{{ qp_url_for(view, page=current_page - 1) }}">←</a></li>
+        <li><a href="{{ qp_url_for(view, page=current_page - 1, **kwargs) }}">←</a></li>
       {% else %}
         <li class="disabled"><a>←</a></li>
       {% endif %}
@@ -34,12 +34,12 @@
           {% elif page == '...' %}
             <li class="disabled"><a>...</a></li>
           {% else %}
-            <li><a href="{{ qp_url_for(view, page=page) }}">{{ page }}</a></li>
+            <li><a href="{{ qp_url_for(view, page=page, **kwargs) }}">{{ page }}</a></li>
           {% endif %}
       {% endfor %}
 
       {% if current_page < pages %}
-        <li><a href="{{ qp_url_for(view, page=current_page + 1) }}">→</a></li>
+        <li><a href="{{ qp_url_for(view, page=current_page + 1, **kwargs) }}">→</a></li>
       {% else %}
         <li class="disabled"><a>→</a></li>
       {% endif %}
