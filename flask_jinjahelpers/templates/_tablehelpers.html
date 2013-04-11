@@ -1,11 +1,11 @@
 {% macro render_header_link(view, field, name, sort) %}
   {% if sort|first == '-' and field == sort[1:] %}
-    <th class="table-sort-up">
+    <th class="table-sort-desc">
       <a href="{{ qp_url_for(view, sort=field, **kwargs) }}">{{ name }}</a>
     </th>
   {% else %}
     {% if field == sort %}
-      <th class="table-sort-down">
+      <th class="table-sort-asc">
         <a href="{{ qp_url_for(view, sort='-' + field, **kwargs) }}">{{ name }}</a>
       </th>
     {% else %}
@@ -15,7 +15,6 @@
     {% endif %}
   {% endif %}
 {% endmacro %}
-
 
 
 {% macro render_pagination(view, current_page, pages) %}
