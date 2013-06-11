@@ -4,6 +4,11 @@ Changelog
 Here you can see the full list of changes between each Flask-JinjaHelpers release.
 
 
+0.2.3 (2013-06-11)
+^^^^^^^^^^^^^^^^^^
+
+- Made sorted_fields parameter of header_sort_url function accept strings
+
 
 0.2.3 (2013-06-11)
 ^^^^^^^^^^^^^^^^^^

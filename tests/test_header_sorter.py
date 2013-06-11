@@ -43,6 +43,11 @@ class TestHeaderSorter(object):
             '/?sort=name'
         )
 
+    def test_sorted_fields_supports_string_as_parameter(self):
+        assert header_sort_url('.index', 'age', 'age') == (
+            '/?sort=-age'
+        )
+
     def test_sort_by_single_header(self):
         assert header_sort_url('.index', 'age', ['name']) == (
             '/?sort=age&sort=name'

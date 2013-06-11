@@ -45,6 +45,9 @@ def qp_url_for(endpoint, **kwargs):
 def header_sort_url(
     view, sort_by, sorted_fields=[], max_sorted_fields=2, **kwargs
 ):
+    if isinstance(sorted_fields, basestring):
+        sorted_fields = [sorted_fields]
+
     field_names = []
     for sorted_field in sorted_fields:
         if sorted_field[0] == '-':
