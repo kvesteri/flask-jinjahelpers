@@ -19,7 +19,8 @@ def init_jinja_env(env):
     ])
     env.globals.update(
         visible_page_numbers=visible_page_numbers,
-        qp_url_for=qp_url_for
+        qp_url_for=qp_url_for,
+        header_sort_url=header_sort_url
     )
     return env
 
@@ -38,6 +39,29 @@ def qp_url_for(endpoint, **kwargs):
     for key, value in kwargs.items():
         data[key] = value
     return url_for(endpoint, **data)
+
+
+def header_sort_url(view, sort_by, sorted_fields=[], **kwargs):
+    field_names = []
+    for sorted_field in sorted_fields:
+        if sorted_field[0] == '-':
+            field_names.append(sorted_field[1:])
+        else:
+            field_names.append(sorted_field)
+
+    try:
+        field_index = field_names.index(sort_by)
+    except ValueError:
+        sorted_fields.insert(0, sort_by)
+    else:
+        old_sort_by = sorted_fields[field_index]
+        del sorted_fields[field_index]
+        if old_sort_by[0] == '-':
+            sorted_fields.insert(0, sort_by)
+        else:
+            sorted_fields.insert(0, '-%s' % sort_by)
+
+    return qp_url_for(view, sort=sorted_fields, **kwargs)
 
 
 def visible_page_numbers(page, pages, inner_window=3, outer_window=0):

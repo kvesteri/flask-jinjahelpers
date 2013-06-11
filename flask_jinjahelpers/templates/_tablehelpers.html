@@ -1,19 +1,21 @@
-{% macro render_header_link(view, field, name, sort) %}
-  {% if sort|first == '-' and field == sort[1:] %}
-    <th class="table-sort-desc">
-      <a href="{{ qp_url_for(view, sort=field, **kwargs) }}">{{ name }}</a>
-    </th>
-  {% else %}
-    {% if field == sort %}
-      <th class="table-sort-asc">
-        <a href="{{ qp_url_for(view, sort='-' + field, **kwargs) }}">{{ name }}</a>
+{% macro render_header_link(view, sort_by, header_name, sorted_fields) %}
+  {% for sorted_field in sorted_fields %}
+    {% if sorted_field|first == '-' and sort_by == sorted_field[1:] %}
+      <th class="table-sort-desc">
+        <a href="{{ header_sort_url(view, sort_by, sorted_fields, **kwargs) }}">{{ header_name }}</a>
       </th>
     {% else %}
-      <th>
-        <a href="{{ qp_url_for(view, sort=field, **kwargs) }}">{{ name }}</a>
-      </th>
+      {% if sorted_field == sort_by %}
+        <th class="table-sort-asc">
+          <a href="{{ header_sort_url(view, sort_by, sorted_fields, **kwargs) }}">{{ header_name }}</a>
+        </th>
+      {% else %}
+        <th>
+          <a href="{{ header_sort_url(view, sort_by, sorted_fields, **kwargs) }}">{{ header_name }}</a>
+        </th>
+      {% endif %}
     {% endif %}
-  {% endif %}
+  {% endfor %}
 {% endmacro %}
 
 
