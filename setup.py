@@ -1,6 +1,6 @@
 """
-Flask-Alchemy
----------------
+Flask-JinjaHelpers
+------------------
 
 Various helpers for Flask based Jinja2 templates.
 """
@@ -24,8 +24,8 @@ class PyTest(Command):
 
 
 setup(
-    name='flask-jinjahelpers',
-    version='0.2.0',
+    name='Flask-JinjaHelpers',
+    version='0.2.1',
     url='https://github.com/kvesteri/flask-jinjahelpers',
     license='BSD',
     author='Konsta Vesterinen',

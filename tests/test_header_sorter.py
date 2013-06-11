@@ -62,6 +62,7 @@ class TestHeaderSorter(object):
 
     def test_render_template(self):
         response = self.client.get(url_for('.index', sort=['name']))
+
         assert  '<th class="table-sort-asc">' in response.data
         assert '<a href="/?sort=-name">Name</a>' in response.data
         assert '</th>' in response.data
@@ -70,3 +71,6 @@ class TestHeaderSorter(object):
         assert  '<th class="table-sort-desc">' in response.data
         assert '<a href="/?sort=name">Name</a>' in response.data
         assert '</th>' in response.data
+
+        response = self.client.get(url_for('.index', sort=['name', 'age']))
+        assert response.data.count('</th>') == 1

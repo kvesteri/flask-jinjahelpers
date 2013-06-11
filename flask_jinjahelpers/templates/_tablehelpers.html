@@ -1,21 +1,17 @@
 {% macro render_header_link(view, sort_by, header_name, sorted_fields) %}
-  {% for sorted_field in sorted_fields %}
-    {% if sorted_field|first == '-' and sort_by == sorted_field[1:] %}
-      <th class="table-sort-desc">
-        <a href="{{ header_sort_url(view, sort_by, sorted_fields, **kwargs) }}">{{ header_name }}</a>
-      </th>
-    {% else %}
-      {% if sorted_field == sort_by %}
-        <th class="table-sort-asc">
-          <a href="{{ header_sort_url(view, sort_by, sorted_fields, **kwargs) }}">{{ header_name }}</a>
-        </th>
-      {% else %}
-        <th>
-          <a href="{{ header_sort_url(view, sort_by, sorted_fields, **kwargs) }}">{{ header_name }}</a>
-        </th>
-      {% endif %}
-    {% endif %}
-  {% endfor %}
+  <th{{ " " }}
+  {%- for sorted_field in sorted_fields -%}
+    {%- if sorted_field|first == '-' and sort_by == sorted_field[1:] -%}
+      class="table-sort-desc"
+    {%- else -%}
+      {%- if sorted_field == sort_by -%}
+        class="table-sort-asc"
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  >
+    <a href="{{ header_sort_url(view, sort_by, sorted_fields, **kwargs) }}">{{ header_name }}</a>
+  </th>
 {% endmacro %}
 
 
