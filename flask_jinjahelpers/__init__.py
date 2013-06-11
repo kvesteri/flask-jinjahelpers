@@ -42,7 +42,9 @@ def qp_url_for(endpoint, **kwargs):
     return url_for(endpoint, **data)
 
 
-def header_sort_url(view, sort_by, sorted_fields=[], **kwargs):
+def header_sort_url(
+    view, sort_by, sorted_fields=[], max_sorted_fields=2, **kwargs
+):
     field_names = []
     for sorted_field in sorted_fields:
         if sorted_field[0] == '-':
@@ -62,6 +64,8 @@ def header_sort_url(view, sort_by, sorted_fields=[], **kwargs):
             sorted_fields_copy.insert(0, sort_by)
         else:
             sorted_fields_copy.insert(0, '-%s' % sort_by)
+
+    sorted_fields_copy = sorted_fields_copy[0:max_sorted_fields]
 
     return qp_url_for(view, sort=sorted_fields_copy, **kwargs)
 

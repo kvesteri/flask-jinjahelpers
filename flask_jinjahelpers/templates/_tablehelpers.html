@@ -1,4 +1,4 @@
-{% macro render_header_link(view, sort_by, header_name, sorted_fields) %}
+{% macro render_header_link(view, sort_by, header_name, sorted_fields, max_sorted_fields=2) %}
   <th{{ " " }}
   {%- for sorted_field in sorted_fields -%}
     {%- if sorted_field|first == '-' and sort_by == sorted_field[1:] -%}
@@ -10,7 +10,7 @@
     {%- endif -%}
   {%- endfor -%}
   >
-    <a href="{{ header_sort_url(view, sort_by, sorted_fields, **kwargs) }}">{{ header_name }}</a>
+    <a href="{{ header_sort_url(view, sort_by, sorted_fields, max_sorted_fields, **kwargs) }}">{{ header_name }}</a>
   </th>
 {% endmacro %}
 

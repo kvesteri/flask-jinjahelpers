@@ -68,6 +68,13 @@ class TestHeaderSorter(object):
             '/?sort=age&sort=name'
         )
 
+    def test_max_number_of_sorted_fields(self):
+        assert header_sort_url(
+            '.index', 'name', ['name', 'age'], max_sorted_fields=1
+        ) == (
+            '/?sort=-name'
+        )
+
     def test_render_template(self):
         response = self.client.get(url_for('.index', sort=['name']))
 

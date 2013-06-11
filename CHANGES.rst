@@ -4,6 +4,13 @@ Changelog
 Here you can see the full list of changes between each Flask-JinjaHelpers release.
 
 
+
+0.2.3 (2013-06-11)
+^^^^^^^^^^^^^^^^^^
+
+- Added max_sorted_fields parameter to header sorter
+
+
 0.2.2 (2013-06-11)
 ^^^^^^^^^^^^^^^^^^
 
