@@ -1,3 +1,4 @@
+from copy import copy
 from flask import request, url_for
 from jinja2 import ChoiceLoader, PackageLoader
 from werkzeug.datastructures import MultiDict
@@ -49,19 +50,20 @@ def header_sort_url(view, sort_by, sorted_fields=[], **kwargs):
         else:
             field_names.append(sorted_field)
 
+    sorted_fields_copy = copy(sorted_fields)
     try:
         field_index = field_names.index(sort_by)
     except ValueError:
-        sorted_fields.insert(0, sort_by)
+        sorted_fields_copy.insert(0, sort_by)
     else:
-        old_sort_by = sorted_fields[field_index]
-        del sorted_fields[field_index]
+        old_sort_by = sorted_fields_copy[field_index]
+        del sorted_fields_copy[field_index]
         if old_sort_by[0] == '-':
-            sorted_fields.insert(0, sort_by)
+            sorted_fields_copy.insert(0, sort_by)
         else:
-            sorted_fields.insert(0, '-%s' % sort_by)
+            sorted_fields_copy.insert(0, '-%s' % sort_by)
 
-    return qp_url_for(view, sort=sorted_fields, **kwargs)
+    return qp_url_for(view, sort=sorted_fields_copy, **kwargs)
 
 
 def visible_page_numbers(page, pages, inner_window=3, outer_window=0):

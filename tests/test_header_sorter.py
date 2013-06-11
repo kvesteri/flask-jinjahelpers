@@ -35,8 +35,15 @@ class TestHeaderSorter(object):
         self.client = None
         self.app = None
 
-    def test_sort_by_header(self):
+    def test_with_consecutive_calls(self):
+        assert header_sort_url('.index', 'age') == (
+            '/?sort=age'
+        )
+        assert header_sort_url('.index', 'name') == (
+            '/?sort=name'
+        )
 
+    def test_sort_by_single_header(self):
         assert header_sort_url('.index', 'age', ['name']) == (
             '/?sort=age&sort=name'
         )
@@ -44,6 +51,7 @@ class TestHeaderSorter(object):
         assert header_sort_url('.index', 'name', ['-name']) == '/?sort=name'
         assert header_sort_url('.index', 'name', ['name']) == '/?sort=-name'
 
+    def test_with_multiple_sorted_fields(self):
         assert header_sort_url('.index', 'name', ['name', 'age']) == (
             '/?sort=-name&sort=age'
         )

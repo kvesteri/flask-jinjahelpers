@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each Flask-JinjaHelpers release.
 
 
+0.2.2 (2013-06-11)
+^^^^^^^^^^^^^^^^^^
+
+- Fixed header_sort_url to support consecutive calls
+
+
 0.2.1 (2013-06-11)
 ^^^^^^^^^^^^^^^^^^
 
