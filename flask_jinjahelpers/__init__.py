@@ -28,6 +28,8 @@ def init_jinja_env(env):
 
 def qp_url_for(endpoint, **kwargs):
     """
+    THIS FUNCTION HAS BEEN DEPRECATED:
+
     Returns the url for an endpoint but preserves all request query parameters
 
     kwargs can be used for overriding specific query parameters
@@ -42,20 +44,43 @@ def qp_url_for(endpoint, **kwargs):
     return url_for(endpoint, **data)
 
 
+def url_for_current(**kwargs):
+    """
+    Returns the current url endpoint with all query parameters but replaces
+    the query parameters given in kwargs
+
+    :param kwargs: dict containing query parameter names as keys
+    """
+    data = dict(MultiDict(request.args).lists())
+
+    for key, value in kwargs.items():
+        data[key] = value
+    return url_for(request.endpoint, **data)
+
+
 def header_sort_url(
-    view, sort_by, sorted_fields=[], max_sorted_fields=2, **kwargs
+    sort_by, sorted_fields=[], max_sorted_fields=2, **kwargs
 ):
+    if not sort_by:
+        return url_for_current(**kwargs)
+
     if isinstance(sorted_fields, basestring):
         sorted_fields = [sorted_fields]
 
+    sorted_fields_copy = copy(sorted_fields)
     field_names = []
-    for sorted_field in sorted_fields:
+
+    for index, sorted_field in enumerate(sorted_fields):
+        if (not sorted_field or
+                (len(sorted_field) == 1 and sorted_field[0] == '-')):
+            del sorted_fields_copy[index]
+            continue
+
         if sorted_field[0] == '-':
             field_names.append(sorted_field[1:])
         else:
             field_names.append(sorted_field)
 
-    sorted_fields_copy = copy(sorted_fields)
     try:
         field_index = field_names.index(sort_by)
     except ValueError:
@@ -69,8 +94,9 @@ def header_sort_url(
             sorted_fields_copy.insert(0, '-%s' % sort_by)
 
     sorted_fields_copy = sorted_fields_copy[0:max_sorted_fields]
-
-    return qp_url_for(view, sort=sorted_fields_copy, **kwargs)
+    if sorted_fields_copy:
+        kwargs['sort'] = sorted_fields_copy
+    return url_for_current(**kwargs)
 
 
 def visible_page_numbers(page, pages, inner_window=3, outer_window=0):

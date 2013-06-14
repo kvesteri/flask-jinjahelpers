@@ -1,17 +1,22 @@
-{% macro render_header_link(view, sort_by, header_name, sorted_fields, max_sorted_fields=2) %}
+{% macro render_header_link(sort_by, header_name, sorted_fields, max_sorted_fields=2) %}
   <th{{ " " }}
   {%- for sorted_field in sorted_fields -%}
-    {%- if sorted_field|first == '-' and sort_by == sorted_field[1:] -%}
-      class="table-sort-desc"
-    {%- else -%}
-      {%- if sorted_field == sort_by -%}
-        class="table-sort-asc"
-      {%- endif -%}
-    {%- endif -%}
+    {{ sorter_class(sort_by, sorted_field) }}
   {%- endfor -%}
   >
-    <a href="{{ header_sort_url(view, sort_by, sorted_fields, max_sorted_fields, **kwargs) }}">{{ header_name }}</a>
+    <a href="{{ header_sort_url(sort_by, sorted_fields, max_sorted_fields, **kwargs) }}">{{ header_name }}</a>
   </th>
+{% endmacro %}
+
+
+{% macro sorter_class(sort_by, sorted_field) %}
+  {%- if sorted_field|first == '-' and sort_by == sorted_field[1:] -%}
+    class="table-sort-desc"
+  {%- else -%}
+    {%- if sorted_field == sort_by -%}
+      class="table-sort-asc"
+    {%- endif -%}
+  {%- endif -%}
 {% endmacro %}
 
 

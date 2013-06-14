@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each Flask-JinjaHelpers release.
 
 
+0.3.0 (2013-06-14)
+^^^^^^^^^^^^^^^^^^
+
+- qp_url_for replaced by url_for_current
+
+
 0.2.4 (2013-06-11)
 ^^^^^^^^^^^^^^^^^^
 
