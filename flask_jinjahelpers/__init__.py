@@ -20,7 +20,7 @@ def init_jinja_env(env):
     ])
     env.globals.update(
         visible_page_numbers=visible_page_numbers,
-        qp_url_for=qp_url_for,
+        url_for_current=url_for_current,
         header_sort_url=header_sort_url
     )
     return env
