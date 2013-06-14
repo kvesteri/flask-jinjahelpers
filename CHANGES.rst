@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each Flask-JinjaHelpers release.
 
 
+0.3.2 (2013-06-14)
+^^^^^^^^^^^^^^^^^^
+
+- render_pagination macro now uses url_for_current
+
+
 0.3.1 (2013-06-14)
 ^^^^^^^^^^^^^^^^^^
 

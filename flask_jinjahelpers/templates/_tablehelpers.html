@@ -25,7 +25,7 @@
   <div class="pagination pagination-centered">
     <ul>
       {% if current_page > 1 %}
-        <li><a href="{{ qp_url_for(view, page=current_page - 1, **kwargs) }}">←</a></li>
+        <li><a href="{{ url_for_current(page=current_page - 1, **kwargs) }}">←</a></li>
       {% else %}
         <li class="disabled"><a>←</a></li>
       {% endif %}
@@ -36,12 +36,12 @@
           {% elif page == '...' %}
             <li class="disabled"><a>...</a></li>
           {% else %}
-            <li><a href="{{ qp_url_for(view, page=page, **kwargs) }}">{{ page }}</a></li>
+            <li><a href="{{url_for_current(page=page, **kwargs) }}">{{ page }}</a></li>
           {% endif %}
       {% endfor %}
 
       {% if current_page < pages %}
-        <li><a href="{{ qp_url_for(view, page=current_page + 1, **kwargs) }}">→</a></li>
+        <li><a href="{{ url_for_current(page=current_page + 1, **kwargs) }}">→</a></li>
       {% else %}
         <li class="disabled"><a>→</a></li>
       {% endif %}
