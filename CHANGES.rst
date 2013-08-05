@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each Flask-JinjaHelpers release.
 
 
+0.3.3 (2013-08-05)
+^^^^^^^^^^^^^^^^^^
+
+- Added callback argument for url_for_current func
+
+
 0.3.2 (2013-06-14)
 ^^^^^^^^^^^^^^^^^^
 

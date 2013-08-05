@@ -44,7 +44,7 @@ def qp_url_for(endpoint, **kwargs):
     return url_for(endpoint, **data)
 
 
-def url_for_current(**kwargs):
+def url_for_current(callback=None, **kwargs):
     """
     Returns the current url endpoint with all query parameters but replaces
     the query parameters given in kwargs
@@ -52,6 +52,9 @@ def url_for_current(**kwargs):
     :param kwargs: dict containing query parameter names as keys
     """
     data = dict(MultiDict(request.args).lists())
+
+    if callback:
+        data = callback(data)
 
     for key, value in kwargs.items():
         data[key] = value
