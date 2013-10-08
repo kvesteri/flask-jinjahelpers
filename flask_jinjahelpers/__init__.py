@@ -51,13 +51,14 @@ def url_for_current(callback=None, **kwargs):
 
     :param kwargs: dict containing query parameter names as keys
     """
-    data = dict(MultiDict(request.args).lists())
+    data = {}
+    data.update(request.args)
+    data.update(request.view_args)
+    data.update(kwargs)
 
     if callback:
         data = callback(data)
 
-    for key, value in kwargs.items():
-        data[key] = value
     return url_for(request.endpoint, **data)
 
 
