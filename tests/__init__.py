@@ -1,5 +1,6 @@
-from flask import Flask
-from flask_jinjahelpers import init_jinja_env
+from flask import Flask, url_for
+from flask_jinjahelpers import init_jinja_env, url_for_current
+import pytest
 
 
 class TemplateHelperTestCase(object):
@@ -22,3 +23,37 @@ class TemplateHelperTestCase(object):
         self.context = None
         self.client = None
         self.app = None
+
+
+@pytest.mark.parametrize(
+    ('requested_url', 'expected_url'),
+    [
+        ('/view1/', '/view1/'),
+        ('/view1/?foo=bar', '/view1/?foo=bar'),
+        ('/view1/?foo=bar&foo=baz', '/view1/?foo=bar&foo=baz'),
+        ('/view2/1', '/view2/1'),
+        ('/view2/1?foo=bar', '/view2/1?foo=bar'),
+        ('/view2/1?foo=bar&foo=baz', '/view2/1?foo=bar&foo=baz'),
+        ('/view3/', '/view3/?foo=baz'),
+        ('/view3/?foo=bar', '/view3/?foo=baz')
+    ]
+)
+def test_url_for_current(requested_url, expected_url):
+    app = Flask(__name__)
+    app.debug = True
+
+    @app.route('/view1/')
+    def view1():
+        return url_for_current()
+
+    @app.route('/view2/<int:id>')
+    def view2(id):
+        return url_for_current()
+
+    @app.route('/view3/')
+    def view3():
+        return url_for_current(foo='baz')
+
+    client = app.test_client()
+    response = client.get(requested_url)
+    assert response.data == expected_url
