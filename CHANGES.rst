@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each Flask-JinjaHelpers release.
 
 
+0.3.4 (2013-10-09)
+^^^^^^^^^^^^^^^^^^
+
+- Added request.view_args support for url_for_current
+
+
 0.3.3 (2013-08-05)
 ^^^^^^^^^^^^^^^^^^
 
