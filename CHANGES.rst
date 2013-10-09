@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each Flask-JinjaHelpers release.
 
 
+0.3.5 (2013-10-09)
+^^^^^^^^^^^^^^^^^^
+
+- Removed unused 'view' parameter from render_pagination
+
+
 0.3.4 (2013-10-09)
 ^^^^^^^^^^^^^^^^^^
 
