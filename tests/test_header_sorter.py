@@ -47,7 +47,7 @@ class TestHeaderSorter(TemplateHelperTestCase):
         )
 
     def test_sort_by_single_header(self):
-        assert header_sort_url('age', ['name']) == (
+        assert header_sort_url('age', ['name'], max_sorted_fields=2) == (
             '/?sort=age&sort=name'
         )
         assert header_sort_url('name') == '/?sort=name'
@@ -55,19 +55,27 @@ class TestHeaderSorter(TemplateHelperTestCase):
         assert header_sort_url('name', ['name']) == '/?sort=-name'
 
     def test_with_multiple_sorted_fields(self):
-        assert header_sort_url('name', ['name', 'age']) == (
+        assert header_sort_url(
+            'name', ['name', 'age'], max_sorted_fields=2
+        ) == (
             '/?sort=-name&sort=age'
         )
 
-        assert header_sort_url('age', ['name', 'age']) == (
+        assert header_sort_url(
+            'age', ['name', 'age'], max_sorted_fields=2
+        ) == (
             '/?sort=-age&sort=name'
         )
 
-        assert header_sort_url('age', ['name', 'age']) == (
-            '/?sort=-age&sort=name'
+        assert header_sort_url(
+            'age', ['name', '-age'], max_sorted_fields=2
+        ) == (
+            '/?sort=age&sort=name'
         )
 
-        assert header_sort_url('age', ['-age', 'name']) == (
+        assert header_sort_url(
+            'age', ['-age', 'name'], max_sorted_fields=2
+        ) == (
             '/?sort=age&sort=name'
         )
 

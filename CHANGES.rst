@@ -4,6 +4,13 @@ Changelog
 Here you can see the full list of changes between each Flask-JinjaHelpers release.
 
 
+0.3.6 (2014-10-06)
+^^^^^^^^^^^^^^^^^^
+
+- Default value of max_sorted_fields in header_sort_url changed from 2 to 1
+- Removed deprecated function qp_url_for
+
+
 0.3.5 (2013-10-09)
 ^^^^^^^^^^^^^^^^^^
 

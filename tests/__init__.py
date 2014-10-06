@@ -1,4 +1,4 @@
-from flask import Flask, url_for
+from flask import Flask
 from flask_jinjahelpers import init_jinja_env, url_for_current
 import pytest
 
