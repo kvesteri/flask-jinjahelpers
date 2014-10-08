@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each Flask-JinjaHelpers release.
 
 
+0.3.7 (2014-10-08)
+^^^^^^^^^^^^^^^^^^
+
+- Change render_header_link max_sorted_fields default from 2 to 1
+
+
 0.3.6 (2014-10-06)
 ^^^^^^^^^^^^^^^^^^
 
