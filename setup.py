@@ -40,6 +40,7 @@ setup(
     platforms='any',
     install_requires=[
         'Flask>=0.8',
+        'six>=1.11.0',
     ],
     cmdclass={'test': PyTest},
     classifiers=[

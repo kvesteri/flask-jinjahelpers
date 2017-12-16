@@ -1,5 +1,6 @@
 from flask import request, url_for
 from jinja2 import ChoiceLoader, PackageLoader
+import six
 
 
 def init_jinja_env(env):
@@ -43,7 +44,7 @@ def url_for_current(callback=None, **kwargs):
 
 
 def inverse_sorted_field(sort_by, sorted_fields):
-    if isinstance(sorted_fields, basestring):
+    if isinstance(sorted_fields, six.string_types):
         sorted_fields = [sorted_fields]
     elif sorted_fields is None:
         sorted_fields = []
