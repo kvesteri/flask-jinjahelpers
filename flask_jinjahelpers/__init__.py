@@ -113,7 +113,7 @@ def visible_page_numbers(page, pages, inner_window=3, outer_window=0):
     left_gap_start = min(2 + outer_window, window_from)
     left_gap_end = window_from - 1
 
-    for page in xrange(1, left_gap_start):
+    for page in range(1, left_gap_start):
         visible.append(page)
 
     if left_gap_end - left_gap_start > 0:
@@ -124,7 +124,7 @@ def visible_page_numbers(page, pages, inner_window=3, outer_window=0):
     right_gap_start = min(window_to + 1, pages - outer_window)
     right_gap_end = pages - outer_window - 1
 
-    for page in xrange(left_gap_end + 1, right_gap_start):
+    for page in range(left_gap_end + 1, right_gap_start):
         visible.append(page)
 
     if right_gap_end - right_gap_start > 0:
@@ -132,7 +132,7 @@ def visible_page_numbers(page, pages, inner_window=3, outer_window=0):
     elif right_gap_start == right_gap_end:
         visible.append(right_gap_start)
 
-    for page in xrange(right_gap_end + 1, pages + 1):
+    for page in range(right_gap_end + 1, pages + 1):
         visible.append(page)
 
     return visible
