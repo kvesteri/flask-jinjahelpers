@@ -4,6 +4,12 @@ Changelog
 Here you can see the full list of changes between each Flask-JinjaHelpers release.
 
 
+0.3.8 (2017-01-21)
+^^^^^^^^^^^^^^^^^^
+
+- Add Python 3 support
+
+
 0.3.7 (2014-10-08)
 ^^^^^^^^^^^^^^^^^^
 

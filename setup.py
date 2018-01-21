@@ -25,7 +25,7 @@ class PyTest(Command):
 
 setup(
     name='Flask-JinjaHelpers',
-    version='0.3.7',
+    version='0.3.8',
     url='https://github.com/kvesteri/flask-jinjahelpers',
     license='BSD',
     author='Konsta Vesterinen',
